@@ -1,58 +1,75 @@
 #include "binary_sensor.h"
+#include "esphome/core/log.h"
+#include <cstring>
 
 namespace esphome {
 namespace water_sensor_component {
 
-void WaterSensorComponent::setup() {
+static const char *TAG = "water_sensor_component";
+
+void WaterSensorBinarySensor::setup() {
   if (this->uart_parent_ == nullptr) {
     ESP_LOGE(TAG, "UART parent not set!");
     this->mark_failed();
     return;
   }
-  ESP_LOGI(TAG, "Water Sensor Component initialized successfully");
+  // Ініціалізуємо індекс буфера
+  this->buffer_index = 0;
+  memset(this->buffer, 0, MAX_BUFFER_SIZE);
+  ESP_LOGI(TAG, "Water Sensor BinarySensor initialized successfully");
 }
 
-void WaterSensorComponent::dump_config() {
+void WaterSensorBinarySensor::dump_config() {
   ESP_LOGCONFIG(TAG, "UART Water Sensor:");
   ESP_LOGCONFIG(TAG, "  Device Class: moisture");
   ESP_LOGCONFIG(TAG, "  Expects: 'WATER_ON' or 'WATER_OFF' from UART");
 }
 
-void WaterSensorComponent::loop() {
-  while (this->uart_parent_->available()) {
+void WaterSensorBinarySensor::loop() {
+  while (this->uart_parent_ != nullptr && this->uart_parent_->available()) {
     uint8_t byte;
-    this->uart_parent_->read_array(&byte, 1);
-    char c = (char)byte;
+    if (this->uart_parent_->read_array(&byte, 1) <= 0)
+      break;
+    char c = static_cast<char>(byte);
 
-    if (this->received_data_.size() >= MAX_BUFFER_SIZE) {
-      ESP_LOGW(TAG, "Buffer overflow detected, clearing");
-      this->received_data_.clear();
-      continue;
-    }
-
+    // Якщо прийшов '\n' — обробляємо рядок
     if (c == '\n') {
-      // Видаляємо \r якщо присутня
-      if (!this->received_data_.empty() && this->received_data_.back() == '\r') {
-        this->received_data_.pop_back();
+      // Видаляємо '\r' якщо є
+      if (this->buffer_index > 0 && this->buffer[this->buffer_index - 1] == '\r') {
+        this->buffer[this->buffer_index - 1] = '\0';
+      } else {
+        // Нуль-термінуємо
+        this->buffer[this->buffer_index] = '\0';
       }
 
-      // Парсинг команд
-      if (this->received_data_ == "WATER_ON") {
-        this->publish_state(true);
-        ESP_LOGI(TAG, "Water detected: ON");
-      } else if (this->received_data_ == "WATER_OFF") {
-        this->publish_state(false);
-        ESP_LOGI(TAG, "Water detected: OFF");
-      } else if (!this->received_data_.empty()) {
-        ESP_LOGD(TAG, "Received unknown data: %s", this->received_data_.c_str());
+      // Тепер порівнюємо отриманий рядок
+      if (this->buffer_index > 0) {
+        if (strcmp(this->buffer, "WATER_ON") == 0) {
+          this->publish_state(true);
+          ESP_LOGI(TAG, "Water detected: ON");
+        } else if (strcmp(this->buffer, "WATER_OFF") == 0) {
+          this->publish_state(false);
+          ESP_LOGI(TAG, "Water detected: OFF");
+        } else {
+          ESP_LOGD(TAG, "Received unknown data: %s", this->buffer);
+        }
       }
 
-      this->received_data_.clear();
+      // Очищаємо буфер
+      this->buffer_index = 0;
+      memset(this->buffer, 0, MAX_BUFFER_SIZE);
     } else if (c != '\r') {
-      this->received_data_.push_back(c);
+      // Додаємо символ в буфер, якщо місце є
+      if (this->buffer_index < (MAX_BUFFER_SIZE - 1)) {
+        this->buffer[this->buffer_index++] = c;
+      } else {
+        ESP_LOGW(TAG, "Buffer overflow detected, clearing");
+        this->buffer_index = 0;
+        memset(this->buffer, 0, MAX_BUFFER_SIZE);
+      }
     }
   }
 }
 
-} // namespace water_sensor_component
-} // namespace esphome
+}  // namespace water_sensor_component
+}  // namespace esphome
