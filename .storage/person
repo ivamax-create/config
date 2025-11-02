@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "minor_version": 1,
+  "key": "person",
+  "data": {
+    "items": [
+      {
+        "id": "project_home",
+        "name": "Project home",
+        "user_id": "16ae6d7dde274829aece0cc55f105514",
+        "device_trackers": []
+      }
+    ]
+  }
+}

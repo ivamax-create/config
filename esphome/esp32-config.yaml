@@ -1,0 +1,89 @@
+esphome:
+  name: water_level_sensor
+  friendly_name: esp32_config
+ # includes:
+  #  - waterSensorComponent.h
+
+
+#custom_component:
+#- lambda: |-
+#    auto myComponent = new waterSensorComponent(id(blink_enable), id(blink_frequency));
+#    return {myComponent};
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf # РЕКОМЕНДОВАНО для кращої продуктивності
+  # variant: 
+  #framework:
+   # type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "RVgRgiWAzdxpaqAWgUtP4KqoB9Tglo/9US+k0DgSKQs="
+
+ota:
+  - platform: esphome
+    password: "31e9112d275bd0a017b173e473aa0015"
+
+wifi:
+  ssid: "ASNET"
+  password: "06ABS2015"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Esp32-Config Fallback Hotspot"
+    password: "12345678"
+
+uart:
+  # Використовуємо інші піни, а не стандартні UART0 (GPIO1/3)
+  tx_pin: GPIO17
+  rx_pin: GPIO16
+  baud_rate: 115200
+  id: arduino_uart
+
+
+captive_portal:
+
+binary_sensor:
+  - platform: custom # Використовуємо стару платформу custom
+    lambda: |-
+      auto sensor = new binary_sensor::BinarySensor();
+      id(arduino_uart).set_update_callback([sensor](const std::string& data) {
+        // Логіка парсингу:
+        // Ми не можемо використовувати складну логіку буфера, тому просто перевіряємо, 
+        // чи міститься ключове слово у вхідному рядку (з урахуванням \r\n від Arduino)
+        if (data.rfind("WATER_ON", 0) == 0) {
+          sensor->publish_state(true); // Вода виявлена
+        } else if (data.rfind("WATER_OFF", 0) == 0) {
+          sensor->publish_state(false); // Води немає
+        }
+      });
+      return {sensor};
+      
+    binary_sensors:
+      - name: "Water Leak Detector"
+        device_class: moisture
+        
+# binary_sensor:
+#   # ЗАМІСТЬ 'platform: custom' використовуємо назву нашої теки 'water_sensor_uart'
+#   - platform: water_sensor_component
+#     name: "Water Leak Detector"
+#     device_class: moisture
+#     uart_id: arduino_uart # Передаємо ID нашого UART компонента
+
+# sensor:
+#   - platform: template
+#     id: Water
+#     pin: GPIO17
+#     name: "Water Leak Level"
+#     update_interval: 3s
+#     attenuation: 11db
+#     filters:
+#       - sliding_window_moving_average:
+#           window_size: 5
+#           send_every: 3

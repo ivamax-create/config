@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "auth",
+  "data": {
+    "users": [
+      {
+        "id": "fb0110aeb0684a66b4917d17770318ac",
+        "group_ids": [
+          "system-read-only"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Home Assistant Content",
+        "system_generated": true,
+        "local_only": false
+      },
+      {
+        "id": "14f79511204c4c4c9a324fa2c3ac79ca",
+        "group_ids": [
+          "system-admin"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Supervisor",
+        "system_generated": true,
+        "local_only": false
+      },
+      {
+        "id": "16ae6d7dde274829aece0cc55f105514",
+        "group_ids": [
+          "system-admin"
+        ],
+        "is_owner": true,
+        "is_active": true,
+        "name": "Project home",
+        "system_generated": false,
+        "local_only": false
+      }
+    ],
+    "groups": [
+      {
+        "id": "system-admin",
+        "name": "Administrators"
+      },
+      {
+        "id": "system-users",
+        "name": "Users"
+      },
+      {
+        "id": "system-read-only",
+        "name": "Read Only"
+      }
+    ],
+    "credentials": [
+      {
+        "id": "554ebcccf2c640529f1c2fef9973031b",
+        "user_id": "16ae6d7dde274829aece0cc55f105514",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "project"
+        }
+      }
+    ],
+    "refresh_tokens": [
+      {
+        "id": "1de26e3cd6eb4fd4a59604955fc8378f",
+        "user_id": "fb0110aeb0684a66b4917d17770318ac",
+        "client_id": null,
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "system",
+        "created_at": "2025-10-31T15:29:07.621508+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "36431794924b0e47913a9380e457cfbaac60cd42e649e02b24480c099adf8d0e3d8ed5854466cc1668c33d135d98a892db23c9eecb8979ea8744206b13d82719",
+        "jwt_key": "326fa7516658375d3164f7f104d908617c0f29d52015bd0b5a9d35043b99ab491f6f642108a5865553ac46e06fa4c78515f223b89c181a00a753edf4764d6b83",
+        "last_used_at": null,
+        "last_used_ip": null,
+        "expire_at": null,
+        "credential_id": null,
+        "version": "2025.10.4"
+      },
+      {
+        "id": "129c5a2851724c5389fb1a1c865dc4b6",
+        "user_id": "14f79511204c4c4c9a324fa2c3ac79ca",
+        "client_id": null,
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "system",
+        "created_at": "2025-10-31T15:29:07.757640+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "cffb335914c053ef2aaac075c922ade6bea8b26baca100f9957d2abec34747c32d228c6ab5df6a5ec78123ba28fd0710ae44611ad876c2af5c136cb3e815af04",
+        "jwt_key": "ccb4b5179e5dec0de4cf564b45d6d032238688d70a5039aafbf54238e4382304387a07dc094d75539dfdb23559ff13885b3c12ac5fe69865a16f6d782795a0f0",
+        "last_used_at": "2025-11-02T15:29:19.863175+00:00",
+        "last_used_ip": "172.30.32.2",
+        "expire_at": null,
+        "credential_id": null,
+        "version": "2025.10.4"
+      },
+      {
+        "id": "9be32cff36874e5997a31755bccc371e",
+        "user_id": "16ae6d7dde274829aece0cc55f105514",
+        "client_id": "http://10.10.15.141:8123/",
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "normal",
+        "created_at": "2025-10-31T15:32:29.928960+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "4d9a1fa1b9808f15d4811246bdf4ea2f1b590169311e5837a0eab0a712fefc0faa8a8ed6dadaf1822c3273967d5558006e003355c105cf97a41d3dc8c6fce03a",
+        "jwt_key": "87d470733aeddf4a29ad7330a6e6d0156a69d9b2a60dd11125b22afb2069ed8be8f347984dede3932daa53640267edbb2e2841f72d347b097a2645b5c7ca529e",
+        "last_used_at": "2025-11-02T14:45:06.361630+00:00",
+        "last_used_ip": "10.10.15.143",
+        "expire_at": 1769870706.36163,
+        "credential_id": "554ebcccf2c640529f1c2fef9973031b",
+        "version": "2025.10.4"
+      }
+    ]
+  }
+}
