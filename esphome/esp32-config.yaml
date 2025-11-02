@@ -29,18 +29,19 @@ uart:
   rx_pin: GPIO16
   baud_rate: 115200
   id: arduino_uart
-
-captive_portal:
-
 external_components:
-  - source: github://esphome/esphome
-    components: [water_sensor_component]
+  - source:  ./custom_components
+    #components: [water_sensor_component]
+
+
+# captive_portal:
 
 binary_sensor:
   - platform: water_sensor_component
     name: "Water Leak Detector"
     device_class: moisture
     uart_id: arduino_uart
+
 
 
 # binary_sensor:

@@ -1,7 +1,7 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import binary_sensor, uart
-from esphome.const import CONF_ID, CONF_DEVICE_CLASS, CONF_NAME, CONF_UART_ID
+from esphome.const import CONF_ID, CONF_UART_ID
 
 DEPENDENCIES = ["uart"]
 CODEOWNER = ["@ivamax-create"]
@@ -12,8 +12,7 @@ WaterSensorBinarySensor = water_sensor_component_ns.class_(
 )
 
 CONFIG_SCHEMA = binary_sensor.binary_sensor_schema(
-    WaterSensorBinarySensor,
-    device_class=binary_sensor.DEVICE_CLASSES_AND_ICONS["moisture"],
+    WaterSensorBinarySensor
 ).extend(
     {
         cv.GenerateID(): cv.declare_id(WaterSensorBinarySensor),
