@@ -1,27 +1,14 @@
 esphome:
-  name: water_level_sensor
-  friendly_name: esp32_config
- # includes:
-  #  - waterSensorComponent.h
-
-
-#custom_component:
-#- lambda: |-
-#    auto myComponent = new waterSensorComponent(id(blink_enable), id(blink_frequency));
-#    return {myComponent};
+  name: water-level-sensor
+  friendly_name: ESP32 Water Sensor
 
 esp32:
   board: esp32dev
   framework:
-    type: esp-idf # РЕКОМЕНДОВАНО для кращої продуктивності
-  # variant: 
-  #framework:
-   # type: esp-idf
+    type: esp-idf
 
-# Enable logging
 logger:
 
-# Enable Home Assistant API
 api:
   encryption:
     key: "RVgRgiWAzdxpaqAWgUtP4KqoB9Tglo/9US+k0DgSKQs="
@@ -33,28 +20,30 @@ ota:
 wifi:
   ssid: "ASNET"
   password: "06ABS2015"
-
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Esp32-Config Fallback Hotspot"
     password: "12345678"
 
 uart:
-  # Використовуємо інші піни, а не стандартні UART0 (GPIO1/3)
   tx_pin: GPIO17
   rx_pin: GPIO16
   baud_rate: 115200
   id: arduino_uart
+#external_components:
+  - source:  ../../custom_components
+    components: [water_sensor_component]
 
 
-captive_portal:
+# captive_portal:
 
 binary_sensor:
   - platform: water_sensor_component
     name: "Water Leak Detector"
     device_class: moisture
     uart_id: arduino_uart
-    
+
+
+
 # binary_sensor:
 #   - platform: custom # Використовуємо стару платформу custom
 #     lambda: |-
