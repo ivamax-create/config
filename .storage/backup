@@ -15,6 +15,12 @@
         "failed_addons": [],
         "failed_agent_ids": [],
         "failed_folders": []
+      },
+      {
+        "backup_id": "e6f4abfe",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
       }
     ],
     "config": {

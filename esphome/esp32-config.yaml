@@ -1,11 +1,13 @@
 esphome:
   name: water-level-sensor
   friendly_name: ESP32 Water Sensor
+  # platformio_options:
+  #   platform: espressif32@6.4.0
 
 esp32:
   board: esp32dev
   framework:
-    type: arduino
+    type: esp-idf
 
 logger:
 
@@ -18,11 +20,15 @@ ota:
     password: "31e9112d275bd0a017b173e473aa0015"
 
 wifi:
-  ssid: "ASNET"
-  password: "06ABS2015"
+  ssid: UCU_Guest
   ap:
     ssid: "Esp32-Config Fallback Hotspot"
     password: "12345678"
+  # ssid: "ASNET"
+  # password: "06ABS2015"
+  # ap:
+  #   ssid: "Esp32-Config Fallback Hotspot"
+  #   password: "12345678"
 
 # uart:
 #   tx_pin: GPIO17
