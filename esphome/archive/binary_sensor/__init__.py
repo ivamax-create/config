@@ -16,7 +16,7 @@ CONFIG_SCHEMA = binary_sensor.binary_sensor_schema(
 ).extend(
     {
         cv.GenerateID(): cv.declare_id(WaterSensorBinarySensor),
-        cv.Required(uart.CONF_UART_ID): cv.use_id(uart.UART_COMPONENT),
+        cv.Required(uart.CONF_UART_ID): cv.use_id(uart.UARTComponent),
     }
 ).extend(cv.COMPONENT_SCHEMA)
 

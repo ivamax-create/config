@@ -7,7 +7,7 @@ namespace water_sensor_component {
 
 static const char *TAG = "water_sensor_component";
 
-void WaterSensorBinarySensor::setup() {
+void WaterSensorComponent::setup() {
   if (this->uart_parent_ == nullptr) {
     ESP_LOGE(TAG, "UART parent not set!");
     this->mark_failed();
@@ -18,13 +18,13 @@ void WaterSensorBinarySensor::setup() {
   ESP_LOGI(TAG, "Water Sensor initialized successfully");
 }
 
-void WaterSensorBinarySensor::dump_config() {
+void WaterSensorComponent::dump_config() {
   ESP_LOGCONFIG(TAG, "UART Water Sensor:");
   ESP_LOGCONFIG(TAG, "  Device Class: moisture");
   ESP_LOGCONFIG(TAG, "  Expects: 'WATER_ON' or 'WATER_OFF' from UART");
 }
 
-void WaterSensorBinarySensor::loop() {
+void WaterSensorComponent::loop() {
   while (this->uart_parent_ && this->uart_parent_->available()) {
     uint8_t byte;
     if (this->uart_parent_->read_array(&byte, 1) <= 0)

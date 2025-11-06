@@ -24,23 +24,31 @@ wifi:
     ssid: "Esp32-Config Fallback Hotspot"
     password: "12345678"
 
-uart:
-  tx_pin: GPIO17
-  rx_pin: GPIO16
-  baud_rate: 115200
-  id: arduino_uart
-#external_components:
-  #- source:  ../custom_components
-   # components: [water_sensor_component]
+# uart:
+#   tx_pin: GPIO17
+#   rx_pin: GPIO16
+#   baud_rate: 115200
+#   id: arduino_uart
+# external_components:
+#   - source:  ./components
+#   components: [water_sensor_component]
+#   refresh: always
 
 
-# captive_portal:
-
-binary_sensor:
-  - platform: water_sensor_component
-    name: "Water Leak Detector"
-    device_class: moisture
-    uart_id: arduino_uart
+captive_portal:
+sensor:
+  - platform: adc
+    pin: GPIO35
+    name: "Water Leak Level"
+    update_interval: 1s
+    attenuation: 11db
+    filters:
+      - sliding_window_moving_average:
+          window_size: 5
+          send_every: 1
+          
+# water_sensor_component:
+#     id: arduino_uart
 
 
 
@@ -71,9 +79,14 @@ binary_sensor:
 #     device_class: moisture
 #     uart_id: arduino_uart # Передаємо ID нашого UART компонента
 
+# binary_sensor:
+#   - platform: gpio
+#     pin: 35
+#     name: "Water Leak"
+#     device_class: moisture
 # sensor:
 #   - platform: template
-#     id: Water
+#     id: Waterx
 #     pin: GPIO17
 #     name: "Water Leak Level"
 #     update_interval: 3s
