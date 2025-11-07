@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "esphome.01K9DG8MC328D07MVF510CXA9B",
+  "data": {
+    "device_info": {
+      "uses_password": false,
+      "name": "water-level-sensor",
+      "friendly_name": "ESP32 Water Sensor",
+      "mac_address": "14:2B:2F:C5:DD:00",
+      "compilation_time": "Nov  6 2025, 23:32:19",
+      "model": "esp32dev",
+      "manufacturer": "Espressif",
+      "has_deep_sleep": false,
+      "esphome_version": "2025.10.4",
+      "project_name": "",
+      "project_version": "",
+      "webserver_port": 0,
+      "legacy_voice_assistant_version": 0,
+      "voice_assistant_feature_flags": 0,
+      "legacy_bluetooth_proxy_version": 0,
+      "bluetooth_proxy_feature_flags": 0,
+      "zwave_proxy_feature_flags": 0,
+      "zwave_home_id": 0,
+      "suggested_area": "",
+      "bluetooth_mac_address": "",
+      "api_encryption_supported": true,
+      "devices": [],
+      "areas": [],
+      "area": {
+        "area_id": 0,
+        "name": ""
+      }
+    },
+    "services": [],
+    "api_version": {
+      "major": 1,
+      "minor": 12
+    },
+    "sensor": [
+      {
+        "object_id": "water_leak_level",
+        "key": 1941443479,
+        "name": "Water Leak Level",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "voltage",
+        "unit_of_measurement": "V",
+        "accuracy_decimals": 2,
+        "force_update": false,
+        "state_class": 1,
+        "legacy_last_reset_type": 0
+      }
+    ],
+    "text_sensor": [],
+    "update": []
+  }
+}

@@ -8,7 +8,9 @@
         "id": "project_home",
         "name": "Project home",
         "user_id": "16ae6d7dde274829aece0cc55f105514",
-        "device_trackers": []
+        "device_trackers": [
+          "device_tracker.sm_g780g"
+        ]
       }
     ]
   }

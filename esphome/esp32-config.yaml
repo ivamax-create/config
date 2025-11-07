@@ -20,7 +20,8 @@ ota:
     password: "31e9112d275bd0a017b173e473aa0015"
 
 wifi:
-  ssid: UCU_Guest
+  ssid: "Galaxy S20 FE 360D"
+  password: "wgay5871"
   ap:
     ssid: "Esp32-Config Fallback Hotspot"
     password: "12345678"

@@ -1,1 +1,45 @@
-[]
+- id: '1762463826246'
+  alias: ESP32 automation
+  description: ''
+  triggers:
+  - type: voltage
+    device_id: a0953571a89d79f5b964d876b58db5d2
+    entity_id: 485e9229f0bc10745a86be25ad34eccc
+    domain: sensor
+    trigger: device
+    above: 1
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+  conditions: []
+  actions:
+  - action: notify.notify
+    metadata: {}
+    data:
+      title: ESP32
+      message: Something wrong happens
+  mode: single
+- id: '1762468830774'
+  alias: New automation
+  description: ''
+  triggers:
+  - type: voltage
+    device_id: a0953571a89d79f5b964d876b58db5d2
+    entity_id: 485e9229f0bc10745a86be25ad34eccc
+    domain: sensor
+    trigger: device
+    above: 1
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+  conditions: []
+  actions:
+  - device_id: 4c41dd33a32b566cfe856ea732260255
+    domain: mobile_app
+    type: notify
+    metadata: {}
+    message: '...'
+    title: '...'
+  mode: single
